@@ -22,14 +22,15 @@ mecanismo arquitetural em JAVA
  achar mais adequado (desenho, texto,
  diagrama de classes, etc)
  
- Desafio
- 
+ Desafio:
+ Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT em uma tabela em Banco de Dados 
+ (cada coluna da tabela será uma coluna no CSV)
 */
 public class CsvConverter {
 	
 	/**
-	 * Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT em uma tabela em Banco de Dados 
-	 * (cada coluna da tabela será uma coluna no CSV)
+	 *  Transforma um result set em um arquivo Csv e salva no arquivo especificado,
+	 * acrescenta se o arquivo existentir.
 	 */
 	public boolean resultSetToCsv(ResultSet toConvert, String saveFilePath) throws SQLException, IOException{
 		//criando o beffer para escrita no arquivo, 
