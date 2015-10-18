@@ -47,7 +47,7 @@ public class CsvConverter {
 			for (int i = 1; i <= columnsNumber; i++) {
 				//Começamos a transferência dos dados no result set para a string			
 				tempResConvet.append(toConvert.getString(i));
-				tempResConvet.append(";");
+				tempResConvet.append(",");
 			}			
 			//salvo a cada linha, pois não sei quantas linhas receberei no result set.
 			out.println(tempResConvet.toString());
