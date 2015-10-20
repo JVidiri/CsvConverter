@@ -9,20 +9,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 /**
- * A p r e n d e r e i m p l e m e n t a r u m
- * 
- * mecanismo arquitetural em JAVA
- * 
- * • Preparar uma demonstração • Apresentar para turma como funciona o
- * mecanismo e seu respectivo código-fonte • Criar uma documentação que
- * contemple a visão do programador que usará o mecanismo (usará as
- * interfaces) e a visão de que manterá o mecanismo futuramente (estrutura
- * interna do mecanismo) • Faça a documentação da forma que achar mais
- * adequado (desenho, texto, diagrama de classes, etc)
- * 
- * Desafio: Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT
- * em uma tabela em Banco de Dados (cada coluna da tabela será uma coluna no
- * CSV)
+ * Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT
+ * em uma tabela em Banco de Dados. Cada coluna da tabela será uma coluna no
+ * CSV.
  */
 public class CsvConverter {
 
