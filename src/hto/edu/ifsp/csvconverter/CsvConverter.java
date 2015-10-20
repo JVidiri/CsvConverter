@@ -13,30 +13,33 @@ import java.sql.SQLException;
  * 
  * mecanismo arquitetural em JAVA
  * 
- * • Preparar uma demonstração • Apresentar para turma como funciona o
- * mecanismo e seu respectivo código-fonte • Criar uma documentação que
- * contemple a visão do programador que usará o mecanismo (usará as
- * interfaces) e a visão de que manterá o mecanismo futuramente (estrutura
- * interna do mecanismo) • Faça a documentação da forma que achar mais
- * adequado (desenho, texto, diagrama de classes, etc)
+ * • Preparar uma demonstração • Apresentar para turma como funciona o mecanismo
+ * e seu respectivo código-fonte • Criar uma documentação que contemple a visão
+ * do programador que usará o mecanismo (usará as interfaces) e a visão de que
+ * manterá o mecanismo futuramente (estrutura interna do mecanismo) • Faça a
+ * documentação da forma que achar mais adequado (desenho, texto, diagrama de
+ * classes, etc)
  * 
- * Desafio: Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT
- * em uma tabela em Banco de Dados (cada coluna da tabela será uma coluna no
- * CSV)
+ * Desafio: Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT em
+ * uma tabela em Banco de Dados (cada coluna da tabela será uma coluna no CSV)
  */
 public class CsvConverter {
 
+	
+	
 	/**
 	 * Transforma um result set em um arquivo Csv e salva no arquivo
-	 * especificado, acrescenta se o arquivo existentir.
+	 * especificado, acrescenta se o arquivo existir.
 	 */
-	public boolean resultSetToCsv(ResultSet toConvert, String saveFilePath)
-			throws SQLException, IOException {
+	public boolean resultSetToCsv(ResultSet toConvert, String saveFilePath) throws SQLException, IOException {
+		//verificando se o result set não eh nulo
+		if (toConvert == null){
+			return false;
+		}
 		// criando o beffer para escrita no arquivo,
 		// abrindo para append, pois não quero interferir em um possive arquivo
 		// já existente.
-		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(
-				saveFilePath, true)));
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(saveFilePath, true)));
 		// criando uma variavel para receber temporariamente o nossos dados do
 		// resultset
 		StringBuilder tempResConvet = new StringBuilder();
@@ -52,6 +55,8 @@ public class CsvConverter {
 				// string
 				String content = toConvert.getString(i);
 				if (content != null && content.contains(",")) {
+					//Se possui, adiciono aspas no começo
+					//e no fim do conteudo.
 					tempResConvet.append("\"");
 					tempResConvet.append(content);
 					tempResConvet.append("\"");
