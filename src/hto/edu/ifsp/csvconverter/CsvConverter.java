@@ -51,7 +51,11 @@ public class CsvConverter {
 				// Começamos a transferência dos dados no result set para a
 				// string
 				String content = toConvert.getString(i);
+				//Checo para ver se o conteudo possui virgulas, pois
+				//isso quebraria a formtação correta do CSV
 				if (content != null && content.contains(",")) {
+					//Se possui, adiciono aspas no começo
+					//e no fim do conteudo.
 					tempResConvet.append("\"");
 					tempResConvet.append(content);
 					tempResConvet.append("\"");
