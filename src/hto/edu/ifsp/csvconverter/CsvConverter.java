@@ -20,8 +20,9 @@ import java.sql.SQLException;
  * documentação da forma que achar mais adequado (desenho, texto, diagrama de
  * classes, etc)
  * 
- * Desafio: Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT em
- * uma tabela em Banco de Dados (cada coluna da tabela será uma coluna no CSV)
+ * Mecanismo Genérico de Geração de arquivo CSV baseado em um SELECT
+ * em uma tabela em Banco de Dados. Cada coluna da tabela será uma coluna no
+ * CSV.
  */
 public class CsvConverter {
 
@@ -54,6 +55,8 @@ public class CsvConverter {
 				// Começamos a transferência dos dados no result set para a
 				// string
 				String content = toConvert.getString(i);
+				//Checo para ver se o conteudo possui virgulas, pois
+				//isso quebraria a formtação correta do CSV
 				if (content != null && content.contains(",")) {
 					//Se possui, adiciono aspas no começo
 					//e no fim do conteudo.
