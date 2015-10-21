@@ -15,14 +15,14 @@ import hto.edu.ifsp.csvconverter.CsvConverter;
 
 public class TestCsvConverter {
 
-	//private final static String FOLDER_PATH = "D://";
-	private final static String FOLDER_PATH = "/home/jvidiri/";
+	// private final static String FOLDER_PATH = "D://";
+	private final static String FOLDER_PATH = "/Users/phimac/Documents/";
 
-	private static void deleteFile(String fileName){
-		File file = new File(fileName);  
+	private static void deleteFile(String fileName) {
+		File file = new File(fileName);
 		file.delete();
 	}
-	
+
 	/**
 	 * Compara os dados de um dado result set e um arquivo csv, coluna por
 	 * coluna.
@@ -35,7 +35,8 @@ public class TestCsvConverter {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	private static boolean compareResultSetAndFile(ResultSet rsToTest, String fileToTest) throws IOException, SQLException {
+	private static boolean compareResultSetAndFile(ResultSet rsToTest,
+			String fileToTest) throws IOException, SQLException {
 		BufferedReader br = null;
 		try {
 			// preparando para abrir o arquivo.
@@ -47,13 +48,12 @@ public class TestCsvConverter {
 			// pegando o numero de colunas no resultSet
 			ResultSetMetaData rsmd = rsToTest.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
-			//voltando o resultset para antes da primeira linha, para que o next gere o resultado esperado.
+			// voltando o resultset para antes da primeira linha, para que o
+			// next gere o resultado esperado.
 			rsToTest.beforeFirst();
 			while (linha != null) {
-				//separando as colunas pela virgula
-				linhaSplited = linha.split(","); //TODO está aqui o problema...
-				//achei isso sobre a coisa acima, deve ter um jeito de fazer com virgula...
-				//http://stackoverflow.com/questions/8945113/how-to-split-string-by-space-but-escape-spaces-inside-quotes-in-java
+				// separando as colunas pela virgula
+				linhaSplited = linha.split(",");
 				if (linhaSplited.length != columnsNumber) {
 					return false;
 				} else {
@@ -62,13 +62,14 @@ public class TestCsvConverter {
 						// pegando os dados do result set e cruzando com os do
 						// arquivo
 						String content;
-						//tratando dados entre aspas.
-						if (rsToTest.getString(i) != null && rsToTest.getString(i).contains(",")){
-							content = "\""+rsToTest.getString(i)+"\"";
-						}else{
+						// tratando dados entre aspas.
+						if (rsToTest.getString(i) != null
+								&& rsToTest.getString(i).contains(",")) {
+							content = "\"" + rsToTest.getString(i) + "\"";
+						} else {
 							content = rsToTest.getString(i);
 						}
-						if (!content.equals(linhaSplited[i-1])) {
+						if (!content.equals(linhaSplited[i - 1])) {
 							return false;
 						}
 					}
@@ -97,7 +98,7 @@ public class TestCsvConverter {
 		CsvConverter test = new CsvConverter();
 		test.resultSetToCsv(rs, FOLDER_PATH + "teste.csv");
 		// verificando o conteúdo
-		return compareResultSetAndFile(rs,FOLDER_PATH + "teste.csv");		
+		return compareResultSetAndFile(rs, FOLDER_PATH + "teste.csv");
 	}
 
 	/**
@@ -116,9 +117,9 @@ public class TestCsvConverter {
 		CsvConverter test = new CsvConverter();
 		test.resultSetToCsv(rs, FOLDER_PATH + "teste2.csv");
 		// verificando o conteúdo
-		return compareResultSetAndFile(rs,FOLDER_PATH + "teste2.csv");		
+		return compareResultSetAndFile(rs, FOLDER_PATH + "teste2.csv");
 	}
-	
+
 	/**
 	 * Teste com duas linhas e três colunas + virgula.
 	 * 
@@ -135,46 +136,46 @@ public class TestCsvConverter {
 		deleteFile(FOLDER_PATH + "teste3.csv");
 		test.resultSetToCsv(rs, FOLDER_PATH + "teste3.csv");
 		// verificando o conteúdo
-		return compareResultSetAndFile(rs,FOLDER_PATH + "teste3.csv");		
+		return compareResultSetAndFile(rs, FOLDER_PATH + "teste3.csv");
 	}
-	
+
 	private static boolean test4() throws Exception {
 		CsvConverter test = new CsvConverter();
-		if (test.resultSetToCsv(null, FOLDER_PATH + "teste4.csv")){
+		if (test.resultSetToCsv(null, FOLDER_PATH + "teste4.csv")) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		System.out.print("teste 1 = ");
 		if (TestCsvConverter.test1()) {
-			System.out.println("sucesso!");			
-		}else{
+			System.out.println("sucesso!");
+		} else {
 			System.out.println("Erro!");
 		}
-		
+
 		System.out.print("teste 2 = ");
 		if (TestCsvConverter.test2()) {
-			System.out.println("sucesso!");			
-		}else{
+			System.out.println("sucesso!");
+		} else {
 			System.out.println("Erro!");
 		}
-		
+
 		System.out.print("teste 3 = ");
 		if (TestCsvConverter.test3()) {
 			System.out.println("sucesso!");
-		}else{
+		} else {
 			System.out.println("Erro!");
 		}
-		
+
 		System.out.print("teste 4 = ");
 		if (TestCsvConverter.test4()) {
 			System.out.println("sucesso!");
-		}else{
+		} else {
 			System.out.println("Erro!");
 		}
-		
+
 	}
 }
